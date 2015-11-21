@@ -94,7 +94,7 @@ public class GraphicsContest extends GraphicsProgram {
 			int vy=rgen.nextInt(2,6);
 			circle.move(vx, vy);
 			pause(DELAY);
-			if (!(circle.getX()>getWidth() && circle.getY()>getHeight())) {
+			if (circle.getX()>getWidth() || circle.getY()>getHeight()) {
 				remove(circle);
 			}		
 		}
