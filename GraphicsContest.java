@@ -14,7 +14,7 @@ public class GraphicsContest extends GraphicsProgram {
 	/**
 	 * constants
 	 */
-	private static final int DELAY=100;
+	private static final int DELAY=10;
 	private static final double NEW_GAME_WIDTH=0;
 	private static final double NEW_GAME_ASCENT=0;
 	
@@ -90,8 +90,8 @@ public class GraphicsContest extends GraphicsProgram {
 	 */
 	private void moveCircle(GImage circle) {
 		if (circle!=null) {
-			int vx=rgen.nextInt(2,6);
-			int vy=rgen.nextInt(2,6);
+			double vx=rgen.nextDouble();
+			double vy=rgen.nextDouble();
 			circle.move(vx, vy);
 			pause(DELAY);
 			if (circle.getX()>getWidth() || circle.getY()>getHeight()) {
