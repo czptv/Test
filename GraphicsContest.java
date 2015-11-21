@@ -22,6 +22,16 @@ public class GraphicsContest extends GraphicsProgram {
 	private RandomGenerator rgen = RandomGenerator.getInstance();
 	private double newGameWidth;
 	private double newGameAscent;
+	private GImage c1;
+	private GImage c2;
+	private GImage c3;
+	private GImage c4;
+	private GImage c5;
+	private GImage c6;
+	private GImage c7;
+	private GImage c8;
+	private GImage c9;
+	private GImage c10;
 	
 	public void run() {
 		//the image at the first display
@@ -48,16 +58,16 @@ public class GraphicsContest extends GraphicsProgram {
 	 */
 	private void createEffect(GLabel newGame) {
 		//draw circles on the screen
-		GImage c1=drawCircle();
-		GImage c2=drawCircle();
-		GImage c3=drawCircle();
-		GImage c4=drawCircle();
-		GImage c5=drawCircle();
-		GImage c6=drawCircle();
-		GImage c7=drawCircle();
-		GImage c8=drawCircle();
-		GImage c9=drawCircle();
-		GImage c10=drawCircle();
+		c1=drawCircle();
+		c2=drawCircle();
+		c3=drawCircle();
+		c4=drawCircle();
+		c5=drawCircle();
+		c6=drawCircle();
+		c7=drawCircle();
+		c8=drawCircle();
+		c9=drawCircle();
+		c10=drawCircle();
 		//get velocity and move
 		while(c1!=null || c2!=null || c3!=null || c4!=null || c5!=null || c6!=null || c7!=null || c8!=null || c9!=null || c10!=null) {
 			c1=moveCircle(c1);
@@ -115,7 +125,16 @@ public class GraphicsContest extends GraphicsProgram {
 		boolean yContain=e.getY()>y && e.getY()<y+2*newGameAscent;
 		if(xContain && yContain) {
 			removeAll();
-			
+			c1=null;
+			c2=null;
+			c3=null;
+			c4=null;
+			c5=null;
+			c6=null;
+			c7=null;
+			c8=null;
+			c9=null;
+			c10=null;
 		}
 	}
 	
