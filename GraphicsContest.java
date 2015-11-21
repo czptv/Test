@@ -103,8 +103,16 @@ public class GraphicsContest extends GraphicsProgram {
 		GImage circle=new GImage("circle.png");
 		double ratio=rgen.nextDouble();
 		circle.scale(ratio,ratio);
-		int x=rgen.nextInt(getWidth());
-		int y=rgen.nextInt(getHeight());
+		int x;
+		int y;
+		boolean side=rgen.nextBoolean();
+		if(side) {
+			x=rgen.nextInt(getWidth());
+			y=0;
+		} else {
+			x=0;
+			y=rgen.nextInt(getHeight());
+		}
 		add(circle,x,y);
 		return circle;
 	}
