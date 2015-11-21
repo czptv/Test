@@ -9,7 +9,9 @@ import acm.graphics.*;
 public class GraphicsContest extends GraphicsProgram {
 
 	public void run() {
-		add(new GImage("FengMian.jpg",0,0));
+		GImage face=new GImage("FengMian.jpg");
+		face.scale(0.3,0.3);
+		add(face,0,0);
 	}
 
 }
