@@ -28,7 +28,7 @@ public class GraphicsContest extends GraphicsProgram {
 		//new game
 		GLabel newGame= new GLabel("New Game");
 		newGame.setFont("Times-20");
-		add(newGame,(getWidth()-newGame.getWidth())/2.0,(getHeight()-newGame.getAscent())*6.0/7.0);
+		add(newGame,(getWidth()-newGame.getWidth())/2.0,getHeight()-2*newGame.getAscent());
 		
 		//special effects
 		createEffect();
