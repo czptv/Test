@@ -107,7 +107,7 @@ public class GraphicsContest extends GraphicsProgram {
 		double y;
 		boolean side=rgen.nextBoolean();
 		if(side) {
-			x=rgen.nextDouble(-circle.getWidth(),getWidth()-circle.getWidth());
+			x=rgen.nextDouble(-circle.getWidth()-300,getWidth()-circle.getWidth());
 			y=0;
 		} else {
 			x=0;
