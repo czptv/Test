@@ -111,8 +111,9 @@ public class GraphicsContest extends GraphicsProgram {
 		double x=(getWidth()-newGameWidth)/2.0;
 		double y=getHeight()-2*newGameAscent;
 		boolean xContain=e.getX()>x && e.getX()<x+newGameWidth;
-		boolean yContain=e.getY()>y && e.getY()<y+newGameAscent;
-		if(xContain && yContain) {
+		boolean yContain=e.getY()>y;
+		boolean a=e.getY()<y+newGameAscent;
+		if(xContain && yContain && a) {
 			removeAll();
 		}
 	}
