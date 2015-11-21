@@ -9,7 +9,8 @@ import acm.graphics.*;
 public class GraphicsContest extends GraphicsProgram {
 
 	public void run() {
-		/* Empty */
+		add(new GImage("GuQin.jpg"));
+		add(new GImage("CharacterFront.jpg"));
 	}
 
 }
