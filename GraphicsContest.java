@@ -38,9 +38,7 @@ public class GraphicsContest extends GraphicsProgram {
 		createEffect(newGame);
 		
 		//start game
-		addMouseListeners();
-		removeAll();
-		playGame();
+		//playGame();
 	}
 
 	/**
@@ -53,9 +51,23 @@ public class GraphicsContest extends GraphicsProgram {
 		GImage c3=drawCircle();
 		GImage c4=drawCircle();
 		GImage c5=drawCircle();
+		GImage c6=drawCircle();
+		GImage c7=drawCircle();
+		GImage c8=drawCircle();
+		GImage c9=drawCircle();
+		GImage c10=drawCircle();
 		//get velocity and move
-		while() {
-			
+		while(c1!=null || c2!=null || c3!=null || c4!=null || c5!=null || c6!=null || c7!=null || c8!=null || c9!=null || c10!=null) {
+			moveCircle(c1);
+			moveCircle(c2);
+			moveCircle(c3);
+			moveCircle(c4);
+			moveCircle(c5);
+			moveCircle(c6);
+			moveCircle(c7);
+			moveCircle(c8);
+			moveCircle(c9);
+			moveCircle(c10);
 		}
 	}
 	
@@ -77,24 +89,25 @@ public class GraphicsContest extends GraphicsProgram {
 	 * @param circle
 	 */
 	private void moveCircle(GImage circle) {
-		while(!(circle.getX()>getWidth() && circle.getY()>getHeight())) {
+		if (circle!=null) {
 			int vx=rgen.nextInt(2,6);
 			int vy=rgen.nextInt(2,6);
 			circle.move(vx, vy);
 			pause(DELAY);
+			if (!(circle.getX()>getWidth() && circle.getY()>getHeight())) {
+				remove(circle);
+			}		
 		}
-		remove(circle);
 	}
 	
 	
-	private void mouseClicked(MouseEvent e) {
+	public void mouseClicked(MouseEvent e) {
 		double x=(getWidth()-NEW_GAME_WIDTH)/2.0;
 		double y=getHeight()-2*NEW_GAME_ASCENT;
-		boolean clicked=false;
 		boolean xContain=e.getX()>x && e.getX()<x+NEW_GAME_WIDTH;
 		boolean yContain=e.getY()>y && e.getY()<y+NEW_GAME_ASCENT;
 		if(xContain && yContain) {
-			clicked=true;
+			removeAll();
 		}
 	}
 }
