@@ -15,13 +15,13 @@ public class GraphicsContest extends GraphicsProgram {
 	 * constants
 	 */
 	private static final int DELAY=1;
-	private static final double NEW_GAME_WIDTH=0;
-	private static final double NEW_GAME_ASCENT=0;
 	
 	/**
 	 * instant variables
 	 */
 	private RandomGenerator rgen = RandomGenerator.getInstance();
+	private double newGameWidth;
+	private double newGameAscent;
 	
 	public void run() {
 		//the image at the first display
@@ -32,12 +32,15 @@ public class GraphicsContest extends GraphicsProgram {
 		//new game
 		GLabel newGame= new GLabel("New Game");
 		newGame.setFont("Times-20");
+		newGameWidth=newGame.getWidth();
+		newGameAscent=newGame.getAscent();
 		add(newGame,(getWidth()-newGame.getWidth())/2.0,getHeight()-2*newGame.getAscent());
 		
 		//special effects
 		createEffect(newGame);
 		
 		//start game
+		
 		//playGame();
 	}
 
@@ -102,10 +105,10 @@ public class GraphicsContest extends GraphicsProgram {
 	
 	
 	public void mouseClicked(MouseEvent e) {
-		double x=(getWidth()-NEW_GAME_WIDTH)/2.0;
-		double y=getHeight()-2*NEW_GAME_ASCENT;
-		boolean xContain=e.getX()>x && e.getX()<x+NEW_GAME_WIDTH;
-		boolean yContain=e.getY()>y && e.getY()<y+NEW_GAME_ASCENT;
+		double x=(getWidth()-newGameWidth)/2.0;
+		double y=getHeight()-2*newGameAscent;
+		boolean xContain=e.getX()>x && e.getX()<x+newGameWidth;
+		boolean yContain=e.getY()>y && e.getY()<y+newGameAscent;
 		if(xContain && yContain) {
 			removeAll();
 		}
