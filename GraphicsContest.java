@@ -71,6 +71,9 @@ public class GraphicsContest extends GraphicsProgram {
 			c9=moveCircle(c9);
 			c10=moveCircle(c10);
 			addMouseListeners();
+			boolean a=c1.isVisible();
+			boolean b=c2.isVisible(); 
+			boolean c=c3.isVisible();
 		}
 	}
 	
