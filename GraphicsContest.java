@@ -87,15 +87,14 @@ public class GraphicsContest extends GraphicsProgram {
 	}
 	
 	
-	private boolean mouseClicked(MouseEvent e) {
+	private void mouseClicked(MouseEvent e) {
 		double x=(getWidth()-NEW_GAME_WIDTH)/2.0;
 		double y=getHeight()-2*NEW_GAME_ASCENT;
 		boolean clicked=false;
 		boolean xContain=e.getX()>x && e.getX()<x+NEW_GAME_WIDTH;
 		boolean yContain=e.getY()>y && e.getY()<y+NEW_GAME_ASCENT;
-		if()) {
+		if(xContain && yContain) {
 			clicked=true;
 		}
-		return clicked;
 	}
 }
