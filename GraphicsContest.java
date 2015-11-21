@@ -59,7 +59,7 @@ public class GraphicsContest extends GraphicsProgram {
 		GImage c9=drawCircle();
 		GImage c10=drawCircle();
 		//get velocity and move
-		while(c1.isVisible() || c2.isVisible() || c3.isVisible() || c4.isVisible() || c5.isVisible() || c6.isVisible() || c7.isVisible() || c8.isVisible() || c9.isVisible() || c10.isVisible()) {
+		while(c1!=null || c2!=null || c3!=null || c4!=null || c5!=null || c6!=null || c7!=null || c8!=null || c9!=null || c10!=null) {
 			c1=moveCircle(c1);
 			c2=moveCircle(c2);
 			c3=moveCircle(c3);
@@ -71,9 +71,6 @@ public class GraphicsContest extends GraphicsProgram {
 			c9=moveCircle(c9);
 			c10=moveCircle(c10);
 			addMouseListeners();
-			boolean a=c1.isVisible();
-			boolean b=c2.isVisible(); 
-			boolean c=c3.isVisible();
 		}
 	}
 	
@@ -118,6 +115,7 @@ public class GraphicsContest extends GraphicsProgram {
 		boolean yContain=e.getY()>y && e.getY()<y+2*newGameAscent;
 		if(xContain && yContain) {
 			removeAll();
+			
 		}
 	}
 	
