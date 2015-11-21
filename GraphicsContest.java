@@ -81,6 +81,10 @@ public class GraphicsContest extends GraphicsProgram {
 			c9=moveCircle(c9);
 			c10=moveCircle(c10);
 			addMouseListeners();
+			boolean a=c1==null;
+			boolean f=c2==null;
+			boolean d=c3==null;
+			boolean s=c4==null;
 		}
 	}
 	
@@ -157,7 +161,7 @@ public class GraphicsContest extends GraphicsProgram {
 	
 	private void getFirstTask() {
 		GImage bg=new GImage("RenWu2.jpg");
-		bg.scale(0.6,0.6);
+		bg.scale(0.63,0.63);
 		add(bg,0,0);
 	}
 }
