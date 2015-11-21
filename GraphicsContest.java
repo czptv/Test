@@ -14,7 +14,7 @@ public class GraphicsContest extends GraphicsProgram {
 	/**
 	 * constants
 	 */
-	private static final int DELAY=10;
+	private static final int DELAY=1;
 	private static final double NEW_GAME_WIDTH=0;
 	private static final double NEW_GAME_ASCENT=0;
 	
