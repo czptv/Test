@@ -51,7 +51,7 @@ public class GraphicsContest extends GraphicsProgram {
 		int y=rgen.nextInt(getHeight());
 		add(circle,x,y);
 		//get velocity and move
-		while(circle.getX()>getWidth() || circle.getY()>getHeight()) {
+		while(!(circle.getX()>getWidth() && circle.getY()>getHeight())) {
 			int vx=rgen.nextInt(2,6);
 			int vy=rgen.nextInt(2,6);
 			circle.move(vx, vy);
