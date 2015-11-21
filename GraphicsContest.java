@@ -100,6 +100,7 @@ public class GraphicsContest extends GraphicsProgram {
 			pause(DELAY);
 			if (circle.getX()>getWidth() || circle.getY()>getHeight()) {
 				remove(circle);
+				circle=drawCircle();
 			}		
 		}
 	}
