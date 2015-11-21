@@ -85,6 +85,13 @@ public class GraphicsContest extends GraphicsProgram {
 			boolean f=c2==null;
 			boolean d=c3==null;
 			boolean s=c4==null;
+			boolean q=c5==null;
+			boolean e=c6==null;
+			boolean r=c7==null;
+			boolean t=c8==null;
+			boolean y=c9==null;
+			boolean u=c10==null;
+			int x;
 		}
 	}
 	
