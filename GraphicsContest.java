@@ -61,16 +61,16 @@ public class GraphicsContest extends GraphicsProgram {
 		GImage c10=drawCircle();
 		//get velocity and move
 		while(c1!=null || c2!=null || c3!=null || c4!=null || c5!=null || c6!=null || c7!=null || c8!=null || c9!=null || c10!=null) {
-			moveCircle(c1);
-			moveCircle(c2);
-			moveCircle(c3);
-			moveCircle(c4);
-			moveCircle(c5);
-			moveCircle(c6);
-			moveCircle(c7);
-			moveCircle(c8);
-			moveCircle(c9);
-			moveCircle(c10);
+			c1=moveCircle(c1);
+			c2=moveCircle(c2);
+			c3=moveCircle(c3);
+			c4=moveCircle(c4);
+			c5=moveCircle(c5);
+			c6=moveCircle(c6);
+			c7=moveCircle(c7);
+			c8=moveCircle(c8);
+			c9=moveCircle(c9);
+			c10=moveCircle(c10);
 			addMouseListeners();
 		}
 	}
@@ -92,7 +92,7 @@ public class GraphicsContest extends GraphicsProgram {
 	 * get velocity and move
 	 * @param circle
 	 */
-	private void moveCircle(GImage circle) {
+	private GImage moveCircle(GImage circle) {
 		if (circle!=null) {
 			double vx=rgen.nextDouble();
 			double vy=rgen.nextDouble();
@@ -103,6 +103,7 @@ public class GraphicsContest extends GraphicsProgram {
 				circle=drawCircle();
 			}		
 		}
+		return circle;
 	}
 	
 	
