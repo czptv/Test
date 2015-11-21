@@ -40,8 +40,7 @@ public class GraphicsContest extends GraphicsProgram {
 		createEffect(newGame);
 		
 		//start game
-		
-		//playGame();
+		playGame();
 	}
 
 	/**
@@ -106,16 +105,40 @@ public class GraphicsContest extends GraphicsProgram {
 		return circle;
 	}
 	
-	
+	/**
+	 * click to start the game 
+	 */
 	public void mouseClicked(MouseEvent e) {
 		double x=(getWidth()-newGameWidth)/2.0;
 		double y=getHeight()-3*newGameAscent;
 		boolean xContain=e.getX()>x && e.getX()<x+newGameWidth;
-		boolean yContain=e.getY()>y;
-		boolean a=e.getY()<y+2*newGameAscent;
-		if(xContain && yContain && a) {
+		boolean yContain=e.getY()>y && e.getY()<y+2*newGameAscent;
+		if(xContain && yContain) {
 			removeAll();
 		}
+	}
+	
+	/**
+	 * play the game
+	 */
+	private void playGame() {
+		goFirstTask();
+		//goSecondTask();
+		//goThirdTask();
+	}
+	
+	/**
+	 * get and finish the first task
+	 */
+	private void goFirstTask() {
+		getFirstTask();
+		//finishFirstTask();
+	}
+	
+	private void getFirstTask() {
+		GImage bg=new GImage("RenWu2.jpg");
+		bg.scale(0.6,0.6);
+		add(bg,0,0);
 	}
 }
 
