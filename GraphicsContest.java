@@ -157,7 +157,7 @@ public class GraphicsContest extends GraphicsProgram {
 	
 	private void getFirstTask() {
 		GImage bg=new GImage("RenWu2.jpg");
-		bg.scale(0.63,0.63);
+		bg.scale(0.6,0.6);
 		add(bg,0,0);
 	}
 }
