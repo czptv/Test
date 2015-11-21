@@ -146,6 +146,7 @@ public class GraphicsContest extends GraphicsProgram {
 			c8=null;
 			c9=null;
 			c10=null;
+			int h;
 		}
 	}
 	
