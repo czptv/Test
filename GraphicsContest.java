@@ -37,7 +37,7 @@ public class GraphicsContest extends GraphicsProgram {
 		//the image at the first display
 		GImage face=new GImage("FengMian.jpg");
 		face.scale(0.43,0.43);
-		add(face,0,0);
+		add(face,-300,0);
 		
 		//new game
 		GLabel newGame= new GLabel("New Game");
@@ -108,9 +108,9 @@ public class GraphicsContest extends GraphicsProgram {
 		boolean side=rgen.nextBoolean();
 		if(side) {
 			x=rgen.nextDouble(-circle.getWidth(),getWidth()-circle.getWidth());
-			y=0;
+			y=-circle.getHeight();
 		} else {
-			x=0;
+			x=-circle.getWidth();
 			y=rgen.nextDouble(-circle.getHeight(),getHeight()-circle.getHeight());
 		}
 		add(circle,x,y);
