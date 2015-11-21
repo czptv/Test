@@ -9,7 +9,7 @@ import acm.graphics.*;
 public class GraphicsContest extends GraphicsProgram {
 
 	public void run() {
-		add(new GImage("FengMian.png",0,0));
+		add(new GImage("FengMian.jpg",0,0));
 	}
 
 }
