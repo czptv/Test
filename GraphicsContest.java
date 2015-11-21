@@ -109,12 +109,10 @@ public class GraphicsContest extends GraphicsProgram {
 	
 	public void mouseClicked(MouseEvent e) {
 		double x=(getWidth()-newGameWidth)/2.0;
-		double y=getHeight()-2*newGameAscent;
-		double q=e.getY();
-		double f=y+newGameAscent;
+		double y=getHeight()-3*newGameAscent;
 		boolean xContain=e.getX()>x && e.getX()<x+newGameWidth;
 		boolean yContain=e.getY()>y;
-		boolean a=e.getY()<y+newGameAscent;
+		boolean a=e.getY()<y+2*newGameAscent;
 		if(xContain && yContain && a) {
 			removeAll();
 		}
