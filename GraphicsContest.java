@@ -71,6 +71,7 @@ public class GraphicsContest extends GraphicsProgram {
 			moveCircle(c8);
 			moveCircle(c9);
 			moveCircle(c10);
+			addMouseListeners();
 		}
 	}
 	
