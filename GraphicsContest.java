@@ -159,6 +159,7 @@ public class GraphicsContest extends GraphicsProgram {
 		GImage bg=new GImage("RenWu2.jpg");
 		bg.scale(0.63,0.63);
 		add(bg,0,0);
+		GImage npc=new GImage("NPCEastCe.png");
 	}
 }
 
