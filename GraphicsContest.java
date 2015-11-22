@@ -22,6 +22,7 @@ public class GraphicsContest extends GraphicsProgram {
 	private RandomGenerator rgen = RandomGenerator.getInstance();
 	private double newGameWidth;
 	private double newGameAscent;
+	private boolean firstClicked=false;
 	private GImage c1;
 	private GImage c2;
 	private GImage c3;
@@ -69,7 +70,8 @@ public class GraphicsContest extends GraphicsProgram {
 		c9=drawCircle();
 		c10=drawCircle();
 		//get velocity and move
-		while(c1!=null || c2!=null || c3!=null || c4!=null || c5!=null || c6!=null || c7!=null || c8!=null || c9!=null || c10!=null) {
+		addMouseListeners();
+		while(!firstClicked) {
 			c1=moveCircle(c1);
 			c2=moveCircle(c2);
 			c3=moveCircle(c3);
@@ -80,18 +82,6 @@ public class GraphicsContest extends GraphicsProgram {
 			c8=moveCircle(c8);
 			c9=moveCircle(c9);
 			c10=moveCircle(c10);
-			addMouseListeners();
-			boolean a=c1==null;
-			boolean f=c2==null;
-			boolean d=c3==null;
-			boolean s=c4==null;
-			boolean q=c5==null;
-			boolean e=c6==null;
-			boolean r=c7==null;
-			boolean t=c8==null;
-			boolean y=c9==null;
-			boolean u=c10==null;
-			int x;
 		}
 	}
 	
@@ -144,17 +134,7 @@ public class GraphicsContest extends GraphicsProgram {
 		boolean yContain=e.getY()>y && e.getY()<y+2*newGameAscent;
 		if(xContain && yContain) {
 			removeAll();
-			c1=null;
-			c2=null;
-			c3=null;
-			c4=null;
-			c5=null;
-			c6=null;
-			c7=null;
-			c8=null;
-			c9=null;
-			c10=null;
-			int h;
+			firstClicked=true;
 		}
 	}
 	
