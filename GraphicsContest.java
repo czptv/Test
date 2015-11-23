@@ -25,7 +25,6 @@ public class GraphicsContest extends GraphicsProgram {
 	/**
 	 * instant variables
 	 */
-	private String playerName;
 	private RandomGenerator rgen = RandomGenerator.getInstance();
 	private double newGameWidth;
 	private double newGameAscent;
@@ -67,6 +66,8 @@ public class GraphicsContest extends GraphicsProgram {
 	private String playerDirection;
 	private boolean left2;
 	private boolean right2;
+	private boolean pressA;
+	private boolean pressS;
 	
 	public void run() {
 		//the image at the first display
@@ -83,7 +84,7 @@ public class GraphicsContest extends GraphicsProgram {
 		add(newGame,(getWidth()-newGame.getWidth())/2.0,getHeight()-2*newGame.getAscent());
 		
 		//special effects
-		createEffect(newGame);
+		createEffect();
 		
 		//start game
 		playGame();
@@ -92,7 +93,7 @@ public class GraphicsContest extends GraphicsProgram {
 	/**
 	 * make certain image move randomly on the screen
 	 */
-	private void createEffect(GLabel newGame) {
+	private void createEffect() {
 		//draw circles on the screen
 		c1=drawCircle();
 		c2=drawCircle();
@@ -180,19 +181,63 @@ public class GraphicsContest extends GraphicsProgram {
 	 * play the game
 	 */
 	private void playGame() {
-		/*goFirstTask();
-		if (task1) {
+		/*introduceTheGame();
+		goFirstTask();
+		if (task1) {*/
 			goSecondTask();
-		}
+		/*}
 		if (task1 && task2) {
 			goThirdScene();
 		}
 		if(!task1 || !task2) {
 			goDie();
-		}*/
-		winGame();
+		}
+		winGame();*/
 	}
 	
+	/**
+	 * introduce the time background and personal background
+	 */
+	private void introduceTheGame() {
+		introTime();
+		introPlayer();
+	}
+	
+	private void introTime() {
+		removeAll();
+		//add bg
+		GImage bg=new GImage("LuoYang.jpg");
+		bg.scale(0.6,0.6);
+		add(bg);
+		//add intro of time
+		GImage time=new GImage("IntroduceTime.png");
+		time.scale(0.2,0.2);
+		add(time,(getWidth()-time.getWidth())/2.0,getHeight());
+		//move intro of time
+		while(time.getY()+time.getHeight()>getHeight()) {
+			time.move(0, -1);
+			pause(50);
+		}
+		waitForClick();
+		removeAll();
+	}
+	
+	private void introPlayer() {
+		//add bg
+		GImage bg=new GImage("BianHua1.jpg");
+		bg.scale(0.6,0.6);
+		add(bg);
+		//add intro
+		GImage introPlayer=new GImage("IntroducePlayer.png");
+		introPlayer.scale(0.15,0.15);
+		add(introPlayer,getWidth()/2-50,0);
+		//add player
+		GImage player=new GImage("CharacterFront.png");
+		player.scale(0.4,0.4);
+		add(player,getWidth()/8,getHeight()/10);
+		waitForClick();
+		removeAll();
+	}
 	/**
 	 * get and finish the first task
 	 */
@@ -268,7 +313,7 @@ public class GraphicsContest extends GraphicsProgram {
 		createPrompt("Yuan's mansion. To arrive at",x,yInit+8*lineHeight);
 		createPrompt("Yuan's mantion, be careful not",x,yInit+9*lineHeight);
 		createPrompt("to fall off the suspension",x,yInit+10*lineHeight);
-		createPrompt("bridge in front of it.",x,yInit+11*lineHeight);
+		createPrompt("bridge or the cliff.",x,yInit+11*lineHeight);
 		
 		waitForClick();
 		removeAll();
@@ -572,22 +617,34 @@ public class GraphicsContest extends GraphicsProgram {
 				break;
 			}
 		} else if(task2GoingOn) {
-			switch(keyCode) { 
-			case KeyEvent.VK_LEFT:
-				playerDirection="Left";
+			if(keyCode==KeyEvent.VK_A) {
+				pressA=true;
+			}
+			if(keyCode==KeyEvent.VK_S) {
+				pressS=true;
+			}
+			if(keyCode==KeyEvent.VK_LEFT) {
 				left2=true;
-				movePlayer();
-			case KeyEvent.VK_RIGHT :
-				playerDirection="Right";
+				playerDirection="Left";
+			}
+			if(keyCode==KeyEvent.VK_RIGHT) {
 				right2=true;
-				movePlayer();
-			case 65: //A
-				plDaZhao(playerDirection);
-			case KeyEvent.VK_S: //S
-				plXiaoZhao(playerDirection);
+				playerDirection="Right";
 			}
 		}
 	}
+	
+	/*public void keyTyped(KeyEvent e) {
+		int keyCode = e.getKeyCode();
+		if(task2GoingOn) {
+			if(keyCode==KeyEvent.VK_A) {
+				pressA=true;
+			}
+			if(keyCode==KeyEvent.VK_S) {
+				pressS=true;
+			}
+		}
+	}*/
 	
 	public void keyReleased(KeyEvent e) {
 		int keyCode = e.getKeyCode();
@@ -607,15 +664,20 @@ public class GraphicsContest extends GraphicsProgram {
 				break;
 			}
 		} else if(task2GoingOn) {
-			switch(keyCode) { 
-			case KeyEvent.VK_LEFT:
+			if(keyCode==KeyEvent.VK_A) {
+				pressA=true;
+			}
+			if(keyCode==KeyEvent.VK_S) {
+				pressS=true;
+			}
+			if(keyCode==KeyEvent.VK_LEFT) {
 				left2=false;
-			case KeyEvent.VK_RIGHT :
+			}
+			if(keyCode==KeyEvent.VK_RIGHT) {
 				right2=false;
 			}
 		}
 	}
-		
 	
 	private void meetMaid() {
 		//draw bg
@@ -652,15 +714,13 @@ public class GraphicsContest extends GraphicsProgram {
 	}
 	
 	private void goSecondTask() {
-		task2GoingOn=true;
 		playerDirection="Left";
 		plLife=PLAYER_LIFE;
 		npcLife=NPC_LIFE;
-		changeBg1();
-		changeBg2();
-		changeBg3();
+		//changeBg1();
+		//changeBg2();
+		//changeBg3();
 		fight();
-		task2GoingOn=false;
 		if (plLife>0) {
 			task2=true;
 		} else if(npcLife>0) {
@@ -675,9 +735,13 @@ public class GraphicsContest extends GraphicsProgram {
 		GImage rain=new GImage("Rain.png");
 		rain.scale(0.5,0.5);
 		add(rain,1,-920);
+		GImage wind=new GImage("Wind.png");
+		wind.scale(0.4,0.4);
+		add(wind,-wind.getWidth()+getWidth(),0);
 		for(int i=0;i<330;i++) {
 			bg1.move(-0.8, 0);
 			rain.move(0,3);
+			wind.move(2,0);
 			pause(DELAY*20);
 		}
 		removeAll();
@@ -691,10 +755,14 @@ public class GraphicsContest extends GraphicsProgram {
 		GImage rain=new GImage("Rain.png");
 		rain.scale(0.45,0.45);
 		add(rain,0,-800);
+		GImage wind=new GImage("Wind.png");
+		wind.scale(0.4,0.4);
+		add(wind,-wind.getWidth()+getWidth()+660,0);
 		for(int i=0;i<200;i++) {
 			bg2.scale(1.002,1.002);
 			bg2.move(-1*0.3,0);
 			rain.move(0,4);
+			wind.move(2, 0);
 			pause(DELAY*30);
 		}
 		removeAll();
@@ -741,28 +809,34 @@ public class GraphicsContest extends GraphicsProgram {
 		double x=90;
 		double yInit=230;
 		double lineHeight=30;
-		createPrompt("You can never get the",x,yInit);
-		createPrompt("scroll unless you beat",x,yInit+lineHeight);
-		createPrompt("me. Come and fight with",x,yInit+2*lineHeight);
-		createPrompt("me!",x,yInit+3*lineHeight);
+		createPrompt("I'm a guard here. You",x,yInit);
+		createPrompt("can never get the scroll",x,yInit+lineHeight);
+		createPrompt("unless you beat me.",x,yInit+2*lineHeight);
+		createPrompt("Come and fight with me!",x,yInit+3*lineHeight);
 	}
 	
 	private void drawScroll2_2() {
 		GImage scroll=new GImage("Scroll.png");
-		scroll.scale(0.4,0.3);
-		add(scroll,40,120);
+		scroll.scale(0.5,0.52);
+		add(scroll,30,10);
 	}
 	
 	private void addPrompt2_2() {
-		double x=85;
-		double yInit=180;
+		double x=105;
+		double yInit=100;
 		double lineHeight=30;
 		createPrompt("Hint: Try the keys \"Left\",",x,yInit);
-		createPrompt("\"Right\", \"Up\" & \"Down\"",x,yInit+lineHeight);
-		createPrompt("for moving. Try \"S\" to",x,yInit+2*lineHeight);
-		createPrompt("throw the hidden weapon",x,yInit+3*lineHeight);
-		createPrompt("at your enemy and \"A\"",x,yInit+4*lineHeight);
-		createPrompt("to use airflow against him.",x,yInit+5*lineHeight);
+		createPrompt("and \"Right\" to move. Try",x,yInit+lineHeight);
+		createPrompt("\"S\" to throw the hidden",x,yInit+2*lineHeight);
+		createPrompt("weapon at your enemy and",x,yInit+3*lineHeight);
+		createPrompt("\"A\" to use airflow against",x,yInit+4*lineHeight);
+		createPrompt("him. The hidden weapon can",x,yInit+5*lineHeight);
+		createPrompt("cause larger damage. The",x,yInit+6*lineHeight);
+		createPrompt("guard can both attack and",x,yInit+7*lineHeight);
+		createPrompt("defend against you attack.",x,yInit+8*lineHeight);
+		createPrompt("Your attack will not work",x,yInit+9*lineHeight);
+		createPrompt("when he is defending.",x,yInit+10*lineHeight);
+
 	}
 	
 	private void fight() {
@@ -799,7 +873,29 @@ public class GraphicsContest extends GraphicsProgram {
 			} else {
 				defendNPC(direction);
 			}
-			pause(100);
+			for(int i=0;i<1000;i++) {
+				task2GoingOn=true;
+				pause(1);
+				controlPlayer();
+				task2GoingOn=false;
+			}
+		}
+	}
+	
+	private void controlPlayer() {
+		if(left2) {
+			movePlayer();
+		}
+		if(right2) {
+			movePlayer();
+		}
+		if(pressA) {
+			plDaZhao(playerDirection);
+			pressA=false;
+		}
+		if (pressS) {
+			plXiaoZhao(playerDirection);
+			pressS=false;
 		}
 	}
 	
@@ -832,10 +928,7 @@ public class GraphicsContest extends GraphicsProgram {
 	private String moveNPC(int step) {
 		String direction=getNPCDirection();
 		//draw NPC
-		remove(npc);
-		npc=new GImage("TianCe"+direction+".png");
-		npc.scale(0.2,0.2);
-		add(npc,npcX,npcY);
+		drawNPCOriginalPosition(direction);
 		boolean hitWall=false;
 		int oneStep=decideDirection(step);
 		for(int i=0;i<Math.abs(step);i++) {
@@ -889,6 +982,7 @@ public class GraphicsContest extends GraphicsProgram {
 		fightNPCPrepare(direction);
 		fightNPC(direction);
 		fightNPCPrepare(direction);
+		drawNPCOriginalPosition(direction);
 	}
 	
 	private void fightNPCPrepare(String direction) {
@@ -916,15 +1010,26 @@ public class GraphicsContest extends GraphicsProgram {
 		hitPlayer(direction);
 	}
 	
+	private void drawNPCOriginalPosition(String direction) {
+		remove(npc);
+		npc=new GImage("TianCe"+direction+".png");
+		npc.scale(0.2,0.2);
+		add(npc,npcX,npcY);
+	}
+	
+	/**
+	 * check if NPC hit player in attacking
+	 * @param direction
+	 */
 	private void hitPlayer(String direction) {
-		double weaponFrontX;
-		double weaponFrontY=npc.getY()-npc.getHeight()/3.0;
+		double plFrontX;
+		double plFrontY=plT2.getY()-plT2.getHeight()/3.0;
 		if (direction.equals("Left")) {
-			weaponFrontX=npc.getX();
+			plFrontX=plT2.getX();
 		} else {
-			weaponFrontX=npc.getX()+npc.getWidth();
+			plFrontX=plT2.getX()+plT2.getWidth();
 		}
-		GObject status=getElementAt(weaponFrontX,weaponFrontY);
+		GObject status=getElementAt(plFrontX,plFrontY);
 		if(status==plT2) {
 			plLife-=NPC_ATTACK;
 		}
@@ -938,6 +1043,7 @@ public class GraphicsContest extends GraphicsProgram {
 		drawDefendNPCFrontCe(direction);
 		drawDefendNPCFront(direction);
 		drawDefendNPCFrontCe(direction);
+		drawNPCOriginalPosition(direction);
 	}
 	
 	private void drawDefendNPCFrontCe(String direction) {
@@ -960,6 +1066,7 @@ public class GraphicsContest extends GraphicsProgram {
 		pause(600);
 	}
 	
+	
 	/**
 	 * player use airflow to attack the NPC
 	 * @param direction
@@ -977,8 +1084,6 @@ public class GraphicsContest extends GraphicsProgram {
 			//effect
 			addDaZhaoEffect(direction);
 		}
-
-		
 	}
 	
 	private void addDaZhaoCharacterBack() {
@@ -1016,7 +1121,12 @@ public class GraphicsContest extends GraphicsProgram {
 		//add the effect
 			airflow=new GImage("Yinbo"+direction+".png");
 			airflow.scale(0.1,0.1);
-			double airflowX=plT2X-100;
+			double airflowX;
+			if(direction.equals("Left")) {
+				airflowX=plT2X-100;
+			} else {
+				airflowX=plT2X+plT2.getWidth()+100;
+			}
 			double airflowY=plT2Y+plT2.getY()/3.0;
 			add(airflow,airflowX,airflowY);
 			airflowX+=airflow.getWidth();
@@ -1024,7 +1134,7 @@ public class GraphicsContest extends GraphicsProgram {
 		
 			//move the airflow
 			boolean hitNPC=false;
-			for(int i=0;i<500;i++) {
+			for(int i=0;i<80;i++) {
 				remove(airflow);
 				airflow=new GImage("Yinbo"+direction+".png");
 				airflow.scale(0.1*Math.pow(1.02,i),0.1*Math.pow(1.02,i));
@@ -1078,12 +1188,14 @@ public class GraphicsContest extends GraphicsProgram {
 		GImage defendPrepare2= new GImage("NPCCeFrontRight.png");
 		GImage defend1=new GImage("NPCDaLeft.png");
 		GImage defend2=new GImage("NPCDaRight.png");
-		boolean npcStatus=!(status.equals(defendPrepare1)) || !(status.equals(defendPrepare2)) || !(status.equals(defend1)) || !(status.equals(defend2));
-		if(npcStatus && status!=null) {
-			npcLife-=AIRFLOW_DAMAGE;
-		} else {
-			remove(airflow);
-			airflow=null;
+		boolean npcStatus=false;
+		if(status!=null) {
+			npcStatus=(status.equals(defendPrepare1)) || (status.equals(defendPrepare2)) || (status.equals(defend1)) || (status.equals(defend2));
+			if(npcStatus) {
+				npcLife-=AIRFLOW_DAMAGE;
+				remove(airflow);
+				airflow=null;
+			} 
 		}
 		return npcStatus;
 	}
@@ -1095,6 +1207,7 @@ public class GraphicsContest extends GraphicsProgram {
 		if(biao==null) {
 			pause(100);
 			addPlayerXiaoZhaoGesture(direction);
+			addPlayerAfterAttack(direction);
 			addXiaoZhaoEffect(direction);
 		}
 	}
@@ -1109,17 +1222,25 @@ public class GraphicsContest extends GraphicsProgram {
 	
 	private void addXiaoZhaoEffect(String direction) {
 		//add effect
-		GImage effect=new GImage("Biao"+direction+".png");
-		effect.scale(0.15,0.15);
-		add(effect,plT2X-120,plT2Y+plT2.getY()/6.0);
+		biao=new GImage("Biao"+direction+".png");
+		biao.scale(0.15,0.15);
+		double biaoX;
+		if (direction.equals("Left")) {
+			biaoX=plT2X-120;
+		} else {
+			biaoX=plT2X+plT2.getWidth()+120;
+		}
+		add(biao,biaoX,plT2Y+plT2.getY()/6.0);
 		//move effect
 		boolean hitNPC=false;
-		for (int i=0;i<400;i++) {
+		for (int i=0;i<80;i++) {
+			double x;
 			if (direction.equals("Left")) {
-				effect.move(-2-0.001*Math.pow(i, 2),0);
+				x=-2-0.01*Math.pow(i, 2);
 			} else {
-				effect.move(2+0.001*Math.pow(i, 2),0);
+				x=2+0.01*Math.pow(i, 2);
 			}
+			biao.move(x, 0);
 			pause(7);
 			if(!hitNPC) {
 				hitNPC=checkBiaoHit(direction);
@@ -1135,7 +1256,7 @@ public class GraphicsContest extends GraphicsProgram {
 	
 	private boolean checkBiaoHit(String direction) {
 		double biaoFrontX;
-		double biaoFrontY=biao.getY()-biao.getHeight()/2.0;;
+		double biaoFrontY=biao.getY()-biao.getHeight()/2.0;
 		if (direction.equals("Left")) {
 			biaoFrontX=biao.getX();
 		} else {
@@ -1146,13 +1267,17 @@ public class GraphicsContest extends GraphicsProgram {
 		GImage defendPrepare2= new GImage("NPCCeFrontRight.png");
 		GImage defend1=new GImage("NPCDaLeft.png");
 		GImage defend2=new GImage("NPCDaRight.png");
-		boolean npcStatus=!(status.equals(defendPrepare1)) || !(status.equals(defendPrepare2)) || !(status.equals(defend1)) || !(status.equals(defend2));
-		if(npcStatus && status!=null) {
-			npcLife-=BIAO_DAMAGE;
-		} else {
-			remove(biao);
-			biao=null;
+		boolean npcStatus=false;
+		if(status!=null) {
+			npcStatus= (status.equals(defendPrepare1)) || (status.equals(defendPrepare2)) || (status.equals(defend1)) || (status.equals(defend2));
+			if(npcStatus) {
+				npcLife-=BIAO_DAMAGE;
+				remove(biao);
+				biao=null;
+			}
 		}
+		
+		
 		return npcStatus;
 	}
 	
@@ -1160,17 +1285,55 @@ public class GraphicsContest extends GraphicsProgram {
 		remove(plT2);
 		if(left2) {
 			addPlayerAfterAttack("Left");
+			playerMoveLeft();
 			while(left2) {
-				plT2.move(-1, 0);
-				pause(10);
+				boolean hitWall=checkPlayerHitWall(plT2);
+				if(!hitWall) {
+					playerMoveLeft();
+				} 
 			}
 		} else if(right2) {
 			addPlayerAfterAttack("Right");
+			playerMoveRight();
 			while(right2) {
-				plT2.move(1, 0);
-				pause(10);
+				boolean hitWall=checkPlayerHitWall(plT2);
+				if(!hitWall) {
+					playerMoveRight();
+				}
 			}
 		}
+	}
+	
+	/**
+	 * player move one step to the left
+	 */
+	private void playerMoveLeft() {
+		plT2.move(-1, 0);
+		plT2X--;
+		pause(10);
+	}
+	
+	/**
+	 * player move one step to the right
+	 */
+	private void playerMoveRight() {
+		plT2.move(1, 0);
+		plT2X++;
+		pause(10);
+	}
+	
+	/**
+	 * check whether player hit the wall
+	 * @param role
+	 * @return
+	 */
+	private boolean checkPlayerHitWall(GImage role) {
+		boolean oppositeDirection=false;
+		boolean hitWall=role.getX()<0 || role.getX()+role.getWidth()>getWidth();
+		if(hitWall) {
+			oppositeDirection=true;
+		}
+		return oppositeDirection;
 	}
 	
 	/**
@@ -1245,6 +1408,13 @@ public class GraphicsContest extends GraphicsProgram {
 		GImage bg=new GImage("BianHua3.jpg");
 		bg.scale(0.46,0.46);
 		add(bg);
+		
+		GImage thanks=new GImage("Thanks.png");
+		thanks.scale(0.2,0.2);
+		add(thanks,(getWidth()-thanks.getWidth())/2.0,(getHeight()-thanks.getHeight())/2.0);
+		
+		firstClicked=false;
+		createEffect();
 	}
 }
 
