@@ -555,7 +555,6 @@ public class GraphicsContest extends GraphicsProgram {
 	
 	public void keyPressed(KeyEvent e) {
 		int keyCode = e.getKeyCode();
-		boolean a=task2GoingOn;
 		if(task1GoingOn) {
 			switch(keyCode) { 
 			case KeyEvent.VK_UP:
@@ -591,7 +590,7 @@ public class GraphicsContest extends GraphicsProgram {
 	
 	public void keyReleased(KeyEvent e) {
 		int keyCode = e.getKeyCode();
-		if(task2GoingOn) {
+		if(task1GoingOn) {
 			switch(keyCode) { 
 			case KeyEvent.VK_UP:
 				up1=false;
@@ -656,9 +655,9 @@ public class GraphicsContest extends GraphicsProgram {
 		playerDirection="Left";
 		plLife=PLAYER_LIFE;
 		npcLife=NPC_LIFE;
-		//changeBg1();
-		//changeBg2();
-		//changeBg3();
+		changeBg1();
+		changeBg2();
+		changeBg3();
 		fight();
 		task2GoingOn=false;
 		if (plLife>0) {
@@ -823,15 +822,6 @@ public class GraphicsContest extends GraphicsProgram {
 			step=stepAbs;
 		}
 		return step;
-	}
-	
-	private GPolygon drawFloor() {
-		GPolygon flr= new GPolygon();
-		flr.addVertex(0, getHeight());
-		flr.addVertex(getWidth(), getHeight());
-		flr.addVertex(getWidth(), getHeight()-60);
-		flr.addVertex(125, getHeight()-60);
-		return flr;
 	}
 	
 	/**
@@ -1186,7 +1176,7 @@ public class GraphicsContest extends GraphicsProgram {
 	 * after player finish the first two task, they go to the third scene
 	 */
 	private void goThirdScene() {
-		//goToTheHead();
+		goToTheHead();
 		meetHead();
 	}
 	
