@@ -180,7 +180,7 @@ public class GraphicsContest extends GraphicsProgram {
 	 * play the game
 	 */
 	private void playGame() {
-		goFirstTask();
+		/*goFirstTask();
 		if (task1) {
 			goSecondTask();
 		}
@@ -189,7 +189,8 @@ public class GraphicsContest extends GraphicsProgram {
 		}
 		if(!task1 || !task2) {
 			goDie();
-		}
+		}*/
+		winGame();
 	}
 	
 	/**
@@ -1178,6 +1179,7 @@ public class GraphicsContest extends GraphicsProgram {
 	private void goThirdScene() {
 		goToTheHead();
 		meetHead();
+		winGame();
 	}
 	
 	private void goToTheHead() {
@@ -1228,9 +1230,21 @@ public class GraphicsContest extends GraphicsProgram {
 	}
 	
 	private void goDie() {
+		GImage bg=new GImage("BianHua8.jpg");
+		bg.scale(0.8,0.8);
+		add(bg);
 		GImage gameOver=new GImage("GameOver.png");
 		gameOver.scale(0.6,0.6);
 		add(gameOver,(getWidth()-gameOver.getWidth())/2.0,(getHeight()-gameOver.getHeight())/2.0);
+	}
+	
+	private void winGame() {
+		waitForClick();
+		removeAll();
+		
+		GImage bg=new GImage("BianHua3.jpg");
+		bg.scale(0.46,0.46);
+		add(bg);
 	}
 }
 
